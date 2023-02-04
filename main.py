@@ -38,7 +38,7 @@ class Cog(commands.Cog):
 
         self.config = {
             "default":{"ReactRoleEmoji":"📣", "HostRoleEmoji":"🏆"},
-            1024581419097403412:{"ReactRoleEmoji":"<:運営:983361088529764452>", "HostRoleEmoji":"<:shinkou:863668105100263435>"},
+            827891370324656148:{"ReactRoleEmoji":"<:運営:983361088529764452>", "HostRoleEmoji":"<:shinkou:863668105100263435>"},
             }
 
         self.host_dic = {}
