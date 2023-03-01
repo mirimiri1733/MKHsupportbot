@@ -253,11 +253,18 @@ class Cog(commands.Cog):
 
             elif "杯" in category_name:
                 category = await guild.create_category(f"🟡{category_name}", position=0)
+
+                await category.create_text_channel(name="参加登録")
+
+                channel = await category.create_text_channel(name="参加登録方法")
+                await channel.set_permissions(target=role_everyone, send_messages = False)
+                await channel.set_permissions(target=role_mkh, send_messages = True)
+                await channel.set_permissions(target=role_hosa, send_messages = True)
+
                 channel = await category.create_text_channel(name="メイン掲示板")
                 await channel.set_permissions(target=role_everyone, send_messages = False)
                 await channel.set_permissions(target=role_mkh, send_messages = True)
                 await channel.set_permissions(target=role_hosa, send_messages = True)
-                await channel.set_permissions(target=role_shinkou, send_messages = True)
 
                 channel = await category.create_text_channel(name="基本ルール")
                 await channel.set_permissions(target=role_everyone, send_messages = False)
@@ -281,7 +288,11 @@ class Cog(commands.Cog):
                 
                 await category.create_text_channel(name="一般連絡用")
                 await category.create_text_channel(name="進行登録連絡用")
-                await category.create_text_channel(name="参加登録")
+                await category.create_text_channel(name="辞退連絡")
+                channel = await category.create_text_channel(name="参加者一覧")
+                await channel.set_permissions(target=role_everyone, send_messages = False)
+                await channel.set_permissions(target=role_mkh, send_messages = True)
+                await channel.set_permissions(target=role_hosa, send_messages = True)
                 await ctx.send(f"`🟡{category_name}を作成しました`")
 
             else:
