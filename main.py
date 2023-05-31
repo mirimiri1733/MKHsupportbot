@@ -400,9 +400,7 @@ class Cog(commands.Cog):
             if role_mkh in member.roles or role_hosa in member.roles:
                 
                 await msg.author.add_roles(role_shinkou)
-                if "★進" in msg.content:
-                    if len(msg.content.split("★進")[0]) < 11:
-                        await msg.author.edit(nick=f"{msg.content.split('★進')[0]}")
+                await msg.author.edit(nick=msg.content)
 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload: discord.RawReactionActionEvent):
@@ -421,38 +419,7 @@ class Cog(commands.Cog):
                 await member.remove_roles(role_part)
 
 
-    @commands.command()
-    async def on_reaction_add(reaction, user):
-    # リアクションがつけられたメッセージのチャンネルが取得できない場合は処理を終了
-        if not reaction.message.channel:
-            return
-
-    # チェックマーク以外のリアクションがつけられた場合は処理を終了
-        if reaction.emoji.name != '✅':
-            return
-
-    # リアクションをつけたユーザーが運営ロールを持っていない場合は処理を終了
-        member = reaction.message.guild.get_member(user.id)
-        if not discord.utils.get(member.roles, name='運営'):
-                return
-
-    # メッセージに★進が含まれている場合は、★進より前のテキストを抽出する
-        before_star = reaction.message.content
-
-    # ニックネームを変更する対象のメンバーを取得する
-        target_member = reaction.message.author
-
-    # ニックネームを変更する
-        await target_member.edit(nick=before_star)
-
-    # 進行役ロールを付与する
-        role = discord.utils.get(member.guild.roles, name='進行役')
-        await target_member.add_roles(role)
-
-    # リアクションをつけたチャンネルにメッセージを送信する
-        channel = client.get_channel(1074745516899967116)
-
-        await channel.send(f'ユーザー {target_member.mention} のニックネームを {before_star} に変更しました')
+    
 
 bot = Bot()
 
